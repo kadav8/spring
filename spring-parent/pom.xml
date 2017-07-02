@@ -50,7 +50,7 @@
     </build>
 
     <modules>
-        <module>spring-demoapp</module>
+        <module>../spring-demoapp</module>
     </modules>
 
 </project>

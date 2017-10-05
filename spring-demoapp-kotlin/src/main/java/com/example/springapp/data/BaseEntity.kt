@@ -8,7 +8,7 @@ import javax.persistence.*
 
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener::class)
-abstract class AbstractEntity {
+open class BaseEntity {
 
     @Id
     @GeneratedValue

@@ -39,8 +39,7 @@ class MetadataService(
     fun createDirector(createDirectorRequest: CreateDirectorRequest): Director {
         var director = Director()
         director.name = createDirectorRequest.name
-        director = directorRepo.save(director)
-        return director
+        return directorRepo.save(director)
     }
 
     fun getMetadata(id: Long): MetadataDto {

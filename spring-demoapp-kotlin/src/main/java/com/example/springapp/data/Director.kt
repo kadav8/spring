@@ -1,27 +1,11 @@
 package com.example.springapp.data
 
-import org.springframework.data.annotation.CreatedDate
-import org.springframework.data.annotation.LastModifiedDate
-import org.springframework.data.jpa.domain.support.AuditingEntityListener
-import java.time.LocalDateTime
-import javax.persistence.*
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.OneToMany
 
 @Entity
-@EntityListeners(AuditingEntityListener::class)
-class Director {
-
-    @Id
-    @GeneratedValue
-    var id: Long? = null
-
-    @Version
-    var version: Int? = null
-
-    @CreatedDate
-    var createdDate: LocalDateTime? = null
-
-    @LastModifiedDate
-    var modifiedDate: LocalDateTime? = null
+class Director : BaseEntity() {
 
     @Column(unique = true)
     var name: String? = null

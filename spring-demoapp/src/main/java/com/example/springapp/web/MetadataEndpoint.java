@@ -1,17 +1,22 @@
 package com.example.springapp.web;
 
-import com.example.springapp.service.MetadataService;
-import com.example.springapp.types.*;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
+import com.example.springapp.service.MetadataService;
+import com.example.springapp.types.CreateDirectorRequest;
+import com.example.springapp.types.CreateDirectorResponse;
+import com.example.springapp.types.CreateMovieRequest;
+import com.example.springapp.types.CreateMovieResponse;
+
 @Endpoint
-@Slf4j
 public class MetadataEndpoint {
+	private static final Logger log = LoggerFactory.getLogger(MetadataEndpoint.class);
     public static final String NAMESPACE_URI = "http://types.springapp.example.com";
 
     @Autowired

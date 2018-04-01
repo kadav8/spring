@@ -3,3 +3,7 @@
 *target*
 /spring-demoapp/spring-demoapp.iml
 /.metadata/
+
+.project
+.settings*
+.classpath

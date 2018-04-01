@@ -1,13 +1,16 @@
 package com.example.springapp.data;
 
-import lombok.Getter;
-import lombok.Setter;
-
-import javax.persistence.*;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapKeyColumn;
+
 @Entity
-@Getter @Setter
 public class Movie extends AbstractEntity {
 
     private String title;
@@ -23,4 +26,35 @@ public class Movie extends AbstractEntity {
     @Column(name="value")
     private Map<String,String> properties;
 
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Director getDirector() {
+		return director;
+	}
+
+	public void setDirector(Director director) {
+		this.director = director;
+	}
+
+	public Integer getYear() {
+		return year;
+	}
+
+	public void setYear(Integer year) {
+		this.year = year;
+	}
+
+	public Map<String, String> getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Map<String, String> properties) {
+		this.properties = properties;
+	}
 }

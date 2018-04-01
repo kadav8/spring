@@ -1,6 +1,7 @@
 package com.example.springapp.service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,15 +58,14 @@ public class MetadataService {
 
     public MetadataDto getMetadata(final Long id) {
         MetadataDto dto = null;
-        Movie movie = movieRepo.findOne(id);
-        if (movie != null) {
+        Optional<Movie> movieOpt = movieRepo.findById(id);
+        if (movieOpt.isPresent()) {
+        	Movie movie = movieOpt.get();
             dto = new MetadataDto();
             dto.setMovieId(id);
             dto.setTitle(movie.getTitle());
             dto.setYear(movie.getYear());
             dto.setMovieVersion(movie.getVersion());
-            System.out.println(movie.getCreatedDate());
-
             dto.setMovieCreatedDate(movie.getCreatedDate().toString());
 
             Director director = movie.getDirector();

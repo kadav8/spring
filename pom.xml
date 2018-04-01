@@ -16,7 +16,6 @@
     
     <modules>
         <module>spring-demoapp</module>
-        <module>spring-demoapp-kotlin</module>
     </modules>
 
     <properties>

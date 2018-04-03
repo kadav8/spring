@@ -14,7 +14,7 @@ public class MetadataDto {
     private String movieCreatedDate;
     private int directorVersion;
     private String directorCreatedDate;
-    private String _self;
+
 	public Long getMovieId() {
 		return movieId;
 	}
@@ -74,11 +74,5 @@ public class MetadataDto {
 	}
 	public void setDirectorCreatedDate(String directorCreatedDate) {
 		this.directorCreatedDate = directorCreatedDate;
-	}
-	public String get_self() {
-		return _self;
-	}
-	public void set_self(String _self) {
-		this._self = _self;
 	}
 }

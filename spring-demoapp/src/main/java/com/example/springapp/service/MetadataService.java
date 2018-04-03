@@ -1,7 +1,7 @@
 package com.example.springapp.service;
 
 import java.util.ArrayList;
-import java.util.Optional;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +22,20 @@ import com.example.springapp.web.MetadataDto;
 @Transactional
 public class MetadataService {
 
+	@Autowired
+	private DirectorRepository directorRepo;
+
     @Autowired
     private MovieRepository movieRepo;
 
-    @Autowired
-    private DirectorRepository directorRepo;
+    @LatencyLogger
+    public Director createDirector(final CreateDirectorRequest createDirectorRequest) {
+        Director director = new Director();
+        director.setName(createDirectorRequest.getName());
+        director.setMovies(new ArrayList<>());
+        director = directorRepo.save(director);
+        return director;
+    }
 
     @LatencyLogger
     public Movie createMovie(final CreateMovieRequest createMovieRequest) {
@@ -37,7 +46,6 @@ public class MetadataService {
             CreateDirectorRequest createDirectorRequest = new CreateDirectorRequest();
             createDirectorRequest.setName(createMovieRequest.getDirectorName());
             director = createDirector(createDirectorRequest);
-            director.setMovies(new ArrayList<>());
         }
         if(director != null) {
             director.getMovies().add(movie);
@@ -48,19 +56,10 @@ public class MetadataService {
         return movie;
     }
 
-    @LatencyLogger
-    public Director createDirector(final CreateDirectorRequest createDirectorRequest) {
-        Director director = new Director();
-        director.setName(createDirectorRequest.getName());
-        director = directorRepo.save(director);
-        return director;
-    }
-
     public MetadataDto getMetadata(final Long id) {
         MetadataDto dto = null;
-        Optional<Movie> movieOpt = movieRepo.findById(id);
-        if (movieOpt.isPresent()) {
-        	Movie movie = movieOpt.get();
+        Movie movie = movieRepo.findById(id).orElse(null);
+        if (movie != null) {
             dto = new MetadataDto();
             dto.setMovieId(id);
             dto.setTitle(movie.getTitle());
@@ -84,5 +83,12 @@ public class MetadataService {
             }
         }
         return dto;
+    }
+
+    public List<MetadataDto> getAllMetadata() {
+    	return movieRepo.findAll()
+    			.stream()
+    			.map(movie -> getMetadata(movie.getId()))
+    			.collect(Collectors.toList());
     }
 }

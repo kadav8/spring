@@ -16,6 +16,8 @@
     
     <modules>
         <module>spring-demoapp</module>
+        <module>spring-simple-example</module>
+        <module>spring-conditional</module>
     </modules>
 
     <properties>

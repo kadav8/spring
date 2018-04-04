@@ -1,3 +1,8 @@
-https://www.youtube.com/user/SpringSourceDev/videos
+#### spring-demoapp
+rest, soap ws, aspect, jpa
 
-https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples
+#### spring-simple-example
+data rest
+
+#### spring-conditional
+conditional

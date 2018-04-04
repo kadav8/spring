@@ -1,8 +1,8 @@
-#### spring-demoapp
+### spring-demoapp:
 rest, soap ws, aspect, jpa
 
-#### spring-simple-example
+### spring-simple-example:
 data rest
 
-#### spring-conditional
+### spring-conditional:
 conditional

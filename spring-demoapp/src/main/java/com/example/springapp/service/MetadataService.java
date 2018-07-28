@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -22,11 +21,13 @@ import com.example.springapp.web.MetadataDto;
 @Transactional
 public class MetadataService {
 
-	@Autowired
 	private DirectorRepository directorRepo;
-
-    @Autowired
     private MovieRepository movieRepo;
+
+    public MetadataService(DirectorRepository directorRepo, MovieRepository movieRepo) {
+    	this.directorRepo = directorRepo;
+    	this.movieRepo = movieRepo;
+    }
 
     @LatencyLogger
     public Director createDirector(final CreateDirectorRequest createDirectorRequest) {

@@ -34,7 +34,7 @@ public class MetadataResource {
     }
 
     @GetMapping("/get/{id}")
-    public MetadataDto getMetadata(@PathVariable("id") Long id) {
+    public MetadataDto getMetadata(@PathVariable Long id) {
         return metadataService.getMetadata(id);
     }
 

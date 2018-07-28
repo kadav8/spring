@@ -29,7 +29,7 @@ public class SpringSimpleExampleApplication {
 	@Bean
 	CommandLineRunner dummy(PeopleRepository peopleRepository) {
 		return args -> {
-			Stream.of("Harry", "Vera", "Emma", "Greg")
+			Stream.of("Vera", "Emma", "Emmy")
 					.forEach(name -> peopleRepository.save(new People(name)));
 			peopleRepository.findAll().forEach(System.out::println);
 		};

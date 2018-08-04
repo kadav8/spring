@@ -6,3 +6,6 @@ data rest
 
 ### spring-conditional:
 conditional
+
+### spring-jdbc:
+jdbc

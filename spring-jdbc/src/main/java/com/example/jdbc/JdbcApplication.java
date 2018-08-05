@@ -22,15 +22,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.mapping.model.NamingStrategy;
-import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
-import org.springframework.data.jdbc.repository.query.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
@@ -39,11 +31,9 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.object.MappingSqlQuery;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @SpringBootApplication
 public class JdbcApplication {
@@ -257,47 +247,3 @@ class JdbcObjectWriter implements ApplicationRunner {
 		}
 }
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Customer {
-		@Id
-		private Long id;
-		private String name, email;
-}
-
-
-@Repository
-interface CustomerRepository extends CrudRepository<Customer, Long> {
-		@Query("select * from customers c where c.email = :email")
-		Collection<Customer> findByEmail(@Param("email") String email);
-}
-
-@Order(6)
-@Component
-class SpringDataJdbc implements ApplicationRunner {
-		@Autowired CustomerRepository customerRepository;
-
-		@Override
-		public void run(ApplicationArguments args) throws Exception {
-				Stream.of("A", "B", "C").forEach(name -> customerRepository.save(new Customer(null, name, name + '@' + name + ".com")));
-				customerRepository.findAll().forEach(System.out::println);
-				customerRepository.save(new Customer(null, "foo", "bar"));
-				customerRepository.findByEmail("bar").forEach(System.out::println);
-		}
-}
-
-@Configuration
-@EnableJdbcRepositories
-class SpringDataJdbcConfiguration {
-
-		@Bean
-		NamingStrategy namingStrategy() {
-				return new NamingStrategy() {
-						@Override
-						public String getTableName(Class<?> type) {
-								return type.getSimpleName().toLowerCase() + "s";
-						}
-				};
-		}
-}

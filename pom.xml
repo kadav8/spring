@@ -15,16 +15,26 @@
     <packaging>pom</packaging>
     
     <modules>
-        <module>spring-demoapp</module>
-        <module>spring-simple-example</module>
-        <module>spring-conditional</module>
-        <module>spring-jdbc</module>
+        <module>spring-aspect</module>
+		<module>spring-conditional</module>
+		<module>spring-data-cassandra</module>
+		<module>spring-data-jdbc</module>
+		<module>spring-data-jpa</module>
+		<module>spring-data-mongo</module>
+		<module>spring-data-redis</module>
+		<module>spring-kafka</module>
+		<module>spring-rabbitmq</module>
+		<module>spring-scheduling</module>
+		<module>spring-web</module>
+		<module>spring-webflux</module>
+		<module>spring-webservices</module>
+		<module>spring-websocket</module>
     </modules>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>8</java.version>
+        <java.version>10</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
@@ -34,24 +44,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
-        </dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
-
 </project>

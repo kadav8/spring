@@ -17,13 +17,13 @@
     <modules>
         <module>spring-aspect</module>
 		<module>spring-conditional</module>
-		<module>spring-data-cassandra</module>
+		<!--<module>spring-data-cassandra</module>-->
 		<module>spring-data-jdbc</module>
 		<module>spring-data-jpa</module>
-		<module>spring-data-mongo</module>
-		<module>spring-data-redis</module>
-		<module>spring-kafka</module>
-		<module>spring-rabbitmq</module>
+		<!--<module>spring-data-mongo</module>-->
+		<!--<module>spring-data-redis</module>-->
+		<!--<module>spring-kafka</module>-->
+		<!--<module>spring-rabbitmq</module>-->
 		<module>spring-scheduling</module>
 		<module>spring-web</module>
 		<module>spring-webflux</module>

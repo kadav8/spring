@@ -14,7 +14,6 @@ import org.springframework.stereotype.Component;
 @SpringBootApplication
 @EnableScheduling
 public class SpringSchedulingApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringSchedulingApplication.class, args);
 	}
@@ -23,7 +22,6 @@ public class SpringSchedulingApplication {
 @Component
 class ScheduledTasks {
     private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
-
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
     @Scheduled(fixedRate = 5000)

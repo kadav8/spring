@@ -31,7 +31,6 @@ import com.example.webservices.types.Movie;
 
 @SpringBootApplication
 public class SpringWebservicesApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(SpringWebservicesApplication.class, args);
 	}

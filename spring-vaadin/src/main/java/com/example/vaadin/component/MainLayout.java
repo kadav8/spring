@@ -1,4 +1,4 @@
-package com.example.vaadin.components;
+package com.example.vaadin.component;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,16 +19,13 @@ public class MainLayout extends VerticalLayout implements RouterLayout {
     	setClassName("main-layout");
     	setMargin(false);
     	setPadding(false);
-    	initAppNavigation();
+    	initHeaderBar();
     }
 
-	private void initAppNavigation() {
-		AppNavigation appNavigation = new AppNavigation();
+	private void initHeaderBar() {
     	List<PageInfo> pages = new ArrayList<>();
     	pages.add(new PageInfo("", "Dashboard"));
-    	pages.add(new PageInfo("issues", "Issues"));
-    	pages.add(new PageInfo("projects", "Projects"));
-    	appNavigation.init("", pages);
-    	add(appNavigation);
+    	pages.add(new PageInfo("documents", "Documents"));
+    	add(new HeaderBar(pages));
 	}
 }

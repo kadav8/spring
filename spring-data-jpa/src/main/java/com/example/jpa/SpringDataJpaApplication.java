@@ -20,8 +20,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import lombok.Data;
-
 @SpringBootApplication
 public class SpringDataJpaApplication {
 	public static void main(String[] args) {
@@ -46,6 +44,7 @@ class DocumentService implements ApplicationRunner {
 			doc.setDocumentName("Document-" + UUID.randomUUID().toString().substring(0, 5));
 			doc.setProperties(Map.of("CreationDate", new Date().toString()));
 			lastSaved = repo.saveAndFlush(doc);
+			System.out.println(String.format("Saved: %s", lastSaved));
 		}
 
 		// find document by Id
@@ -62,12 +61,37 @@ class DocumentService implements ApplicationRunner {
 interface DocumentRepository extends JpaRepository<Document, Long> {
 }
 
-@Data
 @Entity
 class Document {
+	
 	@Id @GeneratedValue
 	private Long documentId;
 	private String documentName;
 	@ElementCollection
 	private Map<String,String> properties;
+	
+	public Long getDocumentId() {
+		return documentId;
+	}
+	public void setDocumentId(Long documentId) {
+		this.documentId = documentId;
+	}
+	public String getDocumentName() {
+		return documentName;
+	}
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+	public Map<String, String> getProperties() {
+		return properties;
+	}
+	public void setProperties(Map<String, String> properties) {
+		this.properties = properties;
+	}
+	
+	@Override
+	public String toString() {
+		return "Document [documentId=" + documentId + ", documentName=" + documentName + ", properties=" + properties
+				+ "]";
+	}
 }

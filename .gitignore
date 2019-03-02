@@ -8,3 +8,5 @@
 .classpath
 maven-wrapper*
 .mvn*
+*.factorypath
+*.xjb

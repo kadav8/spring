@@ -9,11 +9,14 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.jdbc.mapping.model.NamingStrategy;
+//import org.springframework.data.jdbc.mapping.model.NamingStrategy;
 import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 import org.springframework.data.jdbc.repository.query.Query;
+import org.springframework.data.relational.core.mapping.NamingStrategy;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Component;
+
+import com.example.jdbc.dto.Customer;
 
 @Order(7)
 @Component
@@ -24,13 +27,14 @@ public class JdbcRepositories implements ApplicationRunner {
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
+		System.out.println("QUERY 7");
+
 		Stream.of("A", "B", "C")
-				.forEach(name -> customerRepository.save(new Customer(null, name, name + '@' + name + ".com")));
+				.forEach(name -> customerRepository.save(new Customer(null, name, name + "@gmail.com")));
+
 		customerRepository.findAll().forEach(System.out::println);
 
-		customerRepository.save(new Customer(null, "foo", "bar"));
-
-		customerRepository.findByEmail("bar").forEach(System.out::println);
+		customerRepository.findByEmail("A@gmail.com").forEach(System.out::println);
 	}
 }
 
@@ -47,6 +51,7 @@ class SpringDataJdbcConfiguration {
 		return new NamingStrategy() {
 			@Override
 			public String getTableName(Class<?> type) {
+				// customer -> customers
 				return type.getSimpleName().toLowerCase() + "s";
 			}
 		};

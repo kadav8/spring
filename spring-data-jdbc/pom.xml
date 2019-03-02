@@ -12,10 +12,6 @@
 	<artifactId>spring-jdbc</artifactId>
 	<packaging>jar</packaging>
 
-	<properties>
-		<spring-data-releasetrain.version>Lovelace-M3</spring-data-releasetrain.version>
-	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -37,7 +33,7 @@
 		<dependency>
 			<groupId>org.simpleflatmapper</groupId>
 			<artifactId>sfm-springjdbc</artifactId>
-			<version>3.18.0</version>
+			<version>6.4.0</version>
 		</dependency>
 	</dependencies>
 

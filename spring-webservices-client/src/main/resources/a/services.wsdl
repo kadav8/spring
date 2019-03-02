@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://types.webservices.example.com" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://types.webservices.example.com" targetNamespace="http://types.webservices.example.com">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://types.webservices.example.com">
+
+	<xs:element name="createMovieRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="movie" type="tns:movie"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="movie">
+		<xs:sequence>
+			<xs:element name="title" type="xs:string"/>
+			<xs:element name="year" type="xs:int"/>
+			<xs:element name="directorName" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:element name="createMovieResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:baseResponse"/>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getMovieRequest">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="title" type="xs:string"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="getMovieResponse">
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="tns:baseResponse">
+					<xs:sequence>
+						<xs:element name="title" type="xs:string"/>
+						<xs:element name="year" type="xs:int"/>
+						<xs:element name="directorName" type="xs:string"/>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="baseResponse">
+		<xs:sequence>
+			<xs:element name="result" type="xs:string"/>
+			<xs:element name="errorCode" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getMovieResponse">
+    <wsdl:part element="tns:getMovieResponse" name="getMovieResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getMovieRequest">
+    <wsdl:part element="tns:getMovieRequest" name="getMovieRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMovieResponse">
+    <wsdl:part element="tns:createMovieResponse" name="createMovieResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createMovieRequest">
+    <wsdl:part element="tns:createMovieRequest" name="createMovieRequest">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ServicesPort">
+    <wsdl:operation name="getMovie">
+      <wsdl:input message="tns:getMovieRequest" name="getMovieRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getMovieResponse" name="getMovieResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMovie">
+      <wsdl:input message="tns:createMovieRequest" name="createMovieRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:createMovieResponse" name="createMovieResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServicesPortSoap11" type="tns:ServicesPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getMovie">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="getMovieRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createMovie">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="createMovieRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createMovieResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServicesPortService">
+    <wsdl:port binding="tns:ServicesPortSoap11" name="ServicesPortSoap11">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

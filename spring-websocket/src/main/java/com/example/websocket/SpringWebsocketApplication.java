@@ -30,6 +30,7 @@ class MessageSender {
 
 	@Scheduled(fixedRate = 1000)
     public void sendMessage() {
+		System.out.println("sending...");
 		messagingTemplate.convertAndSend("/topic/messages", "Message at " + new Date());
     }
 }

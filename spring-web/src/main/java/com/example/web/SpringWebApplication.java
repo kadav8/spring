@@ -14,9 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-
 @SpringBootApplication
 public class SpringWebApplication {
 	public static void main(String[] args) {
@@ -50,7 +47,7 @@ class DocumentEndpoints {
 	}
 
 	@GetMapping("document/generaterandom/{count}")
-	public void generateRandom(@PathVariable Integer count) {
+	public String generateRandom(@PathVariable Integer count) {
 		for(int i = 0; i < count; i++) {
 			DocumentDto doc = new DocumentDto();
 			doc.setDocumentId(UUID.randomUUID().toString());
@@ -58,19 +55,54 @@ class DocumentEndpoints {
 			doc.setProperties(List.of(new PropertyDto("CreationDate", new Date().toString())));
 			documentsMap.put(doc.getDocumentId(), doc);
 		}
+		return "OK";
 	}
 }
 
-@Data
 class DocumentDto {
 	private String documentId;
 	private String documentName;
 	private List<PropertyDto> properties;
+	
+	public String getDocumentId() {
+		return documentId;
+	}
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
+	public String getDocumentName() {
+		return documentName;
+	}
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+	public List<PropertyDto> getProperties() {
+		return properties;
+	}
+	public void setProperties(List<PropertyDto> properties) {
+		this.properties = properties;
+	}
 }
 
-@Data
-@AllArgsConstructor
 class PropertyDto {
 	private String name;
 	private String value;
+	
+	public PropertyDto(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

@@ -25,7 +25,9 @@ public class ConditionalApplication {
 @Service
 @ConditionalOnProperty(prefix = "com.example.conditional.timeservice", name = "enabled", havingValue = "true", matchIfMissing = true)
 class TimeService {
-	@PostConstruct public void printTime() {
+	
+	@PostConstruct 
+	public void printTime() {
 		System.out.println("Time: " + new Date());
 	}
 }
@@ -33,7 +35,9 @@ class TimeService {
 @Service
 @Conditional(DummyCondition.class)
 class NameService {
-	@PostConstruct public void printName() {
+	
+	@PostConstruct
+	public void printName() {
 		System.out.println("Luke Skywalker");
 	}
 }
@@ -42,6 +46,7 @@ class NameService {
 @EnableScheduling
 @ConditionalOnBean(HelloService.class)
 class ScheduledService {
+	
 	@Autowired
 	HelloService service;
 
@@ -57,7 +62,9 @@ interface HelloService {
 
 //@Service
 class HelloServiceImpl implements HelloService {
-	@Override public void sayHello() {
+	
+	@Override
+	public void sayHello() {
 		System.out.println("helloooo");
 	}
 }

@@ -60,7 +60,7 @@ class WebServiceEndpoint {
         return response;
     }
 
-    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "createDirectorRequest")
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getMovieRequest")
     @ResponsePayload
     public GetMovieResponse getMovie(@RequestPayload GetMovieRequest getMovieRequest) {
     	GetMovieResponse response = new GetMovieResponse();

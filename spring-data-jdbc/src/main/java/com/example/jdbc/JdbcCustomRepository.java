@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
-import org.springframework.data.annotation.Id;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -16,9 +15,7 @@ import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.jdbc.dto.Customer;
 
 @Order(6)
 @Component
@@ -31,6 +28,8 @@ public class JdbcCustomRepository implements ApplicationRunner {
 	public void run(ApplicationArguments args) throws Exception {
 		Customer c = new Customer(null, "Teszt Elek", "elek@gmail.com");
 		Customer savedC = repository.insert(c);
+
+		System.out.println("QUERY 6");
 		System.out.println(repository.findAll());
 		System.out.println(repository.findById(savedC.getId()));
 		System.out.println("--------------");
@@ -65,13 +64,4 @@ class MyCustomerRepository {
 		Long id = simpleJdbcInsert.executeAndReturnKey(params).longValue();
 		return findById(id);
 	}
-}
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-class Customer {
-	@Id
-	private Long id;
-	private String name, email;
 }

@@ -1,4 +1,4 @@
-drop table if exists orders;
+drop table if exists reservations;
 drop table if exists customers;
 
 create table customers (
@@ -7,8 +7,8 @@ create table customers (
   email varchar(255)              null
 );
 
-create table orders (
+create table reservations (
   id          bigint(10) auto_increment not null primary key,
   sku         varchar(255)              not null,
-  customer_fk bigint                    not null references customers (id)
+  customers   bigint                    not null references customers (id)
 );

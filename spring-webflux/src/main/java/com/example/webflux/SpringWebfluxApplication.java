@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -78,16 +76,50 @@ class DocumentRepository {
 	}
 }
 
-@Data
 class DocumentDto {
 	private String documentId;
 	private String documentName;
 	private List<PropertyDto> properties;
+	
+	public String getDocumentId() {
+		return documentId;
+	}
+	public void setDocumentId(String documentId) {
+		this.documentId = documentId;
+	}
+	public String getDocumentName() {
+		return documentName;
+	}
+	public void setDocumentName(String documentName) {
+		this.documentName = documentName;
+	}
+	public List<PropertyDto> getProperties() {
+		return properties;
+	}
+	public void setProperties(List<PropertyDto> properties) {
+		this.properties = properties;
+	}
 }
 
-@Data
-@AllArgsConstructor
 class PropertyDto {
 	private String name;
 	private String value;
+	
+	public PropertyDto(String name, String value) {
+		this.name = name;
+		this.value = value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getValue() {
+		return value;
+	}
+	public void setValue(String value) {
+		this.value = value;
+	}
 }

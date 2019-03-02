@@ -43,6 +43,7 @@ class DocumentService implements ApplicationRunner {
 
 @Component
 class SomeService {
+	
 	@LatencyLogger
 	public void doSomething() throws InterruptedException {
 		TimeUnit.SECONDS.sleep(new Random().nextInt(3)+1);

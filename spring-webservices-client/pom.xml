@@ -9,7 +9,7 @@
 		<artifactId>spring-parent</artifactId>
 		<version>1.0</version>
 	</parent>
-	<artifactId>spring-webservices</artifactId>
+	<artifactId>spring-webservices-client</artifactId>
 	<packaging>jar</packaging>
 
 	<properties>
@@ -18,10 +18,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web-services</artifactId>
@@ -40,10 +36,11 @@
 			<artifactId>jaxb-impl</artifactId>
 			<version>${jaxb-impl.version}</version>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -53,30 +50,29 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>jaxb2-maven-plugin</artifactId>
-				<version>1.6</version>
-				<dependencies>
-					<dependency>
-						<groupId>javax.activation</groupId>
-						<artifactId>javax.activation-api</artifactId>
-						<version>1.2.0</version>
-					</dependency>
-				</dependencies>
+				<groupId>org.jvnet.jaxb2.maven2</groupId>
+				<artifactId>maven-jaxb2-plugin</artifactId>
+				<version>0.14.0</version>
 				<executions>
 					<execution>
-						<id>xjc</id>
+						<id>a</id>
 						<goals>
-							<goal>xjc</goal>
+							<goal>generate</goal>
 						</goals>
+						<configuration>
+							<schemaDirectory>src/main/resources/a</schemaDirectory>
+							<schemaLanguage>WSDL</schemaLanguage>
+							<generatePackage>services.wsdl</generatePackage>
+							<generateDirectory>${project.build.directory}/generated-sources/xjc-a</generateDirectory>
+							<schemaIncludes>
+								<include>*.xsd</include>
+								<include>*.wsdl</include>
+							</schemaIncludes>
+						</configuration>
 					</execution>
 				</executions>
-				<configuration>
-					<schemaDirectory>${project.basedir}/src/main/resources/xsd/</schemaDirectory>
-					<outputDirectory>${project.basedir}/src/main/java</outputDirectory>
-					<clearOutputDir>false</clearOutputDir>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>

@@ -17,6 +17,7 @@
     <modules>
         <module>spring-aspect</module>
 		<module>spring-conditional</module>
+		<module>spring-camunda</module>
 		<!--<module>spring-data-cassandra</module>-->
 		<module>spring-data-jdbc</module>
 		<module>spring-data-jpa</module>
